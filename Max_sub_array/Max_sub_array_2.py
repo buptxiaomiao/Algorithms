@@ -14,14 +14,23 @@ def max_sub_array(low,high,*arr):
 		return (low,high,arr[low])
 	else:
 		mid = (low+high)//2
-		left_result = max_sub_array(low,mid,*arr)
-		right_result = max_sub_array(mid+1,high,*arr)
-		cross_result = find_max_crossing_sub_array(low,mid,high,*arr)
-	if left_result(2)>right_result(2) and left_result(2)>cross_result(2):
-		return left_result
-	elif right_result(2)>left_result(2) and right_result(2)>cross_result(2):
-		return right_result
+
+		(left_low,left_high,left_sum
+				) = max_sub_array(low,mid,*arr)
+
+		(right_low,right_high,right_sum
+				) = max_sub_array(mid+1,high,*arr)
+
+		(cross_low,cross_high,cross_sum
+				) = find_max_crossing_sub_array(low,mid,high,*arr)
+
+	if left_sum>right_sum and left_sum>cross_sum:
+		return (left_low,left_high,left_sum)
+	elif right_sum>left_sum and right_sum>cross_sum:
+		return (right_low,right_high,right_sum)
 	else:
-		 return cross_result
+		 return (cross_low,cross_high,cross_sum)
 if __name__ == '__main__':
-	max_sub_array(0,len(a)-1,*a)
+	(low,high,sum) = max_sub_array(0,len(a)-1,*a)
+	result = a[low:high+1]
+	print (result,sum)

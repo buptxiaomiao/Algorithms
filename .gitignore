@@ -2,3 +2,7 @@
 *.swp
 
 *.class
+.idea/
+*.xml
+*.iml
+

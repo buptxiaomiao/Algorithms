@@ -29,3 +29,27 @@ class Solution(object):
             for i in range(k + 1)
         ]
 
+    # 递归, 时间&空间复杂度都不ok
+    def __dividng_board(self, shorter, longer, k):
+        """
+        :type shorter: int
+        :type longer: int
+        :type k: int
+        :rtype: List[int]
+        """
+        if k == 0:
+            return []
+
+        if k == 1:
+            return [shorter, longer]
+
+        if shorter == longer:
+            return [shorter * k]
+
+        res = self.divingBoard(shorter, longer, k - 1)
+
+        return sorted(
+            list(set(
+                [x + shorter for x in res] + [x + longer for x in res]
+            ))
+        )
